@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b16">
+  <meta name="description" content="CloakStudio — a browser-based media privacy and protection workspace.">
+  <title>CloakStudio — Protect Your Creativity</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- LANDING PAGE -->
+  <section id="landing" class="landing">
+    <nav class="landing-nav">
+      <a href="#" class="brand">
+        <span class="brand-mark">C</span>
+        <span>Cloak<span class="brand-light">Studio</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <button class="button button-small" id="navLaunch">Launch Studio</button>
+      </div>
+    </nav>
+
+    <main class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="status-dot"></span>
+          YOUR MEDIA. YOUR DEVICE. YOUR CONTROL.
+        </div>
+
+        <h1>Your creativity<br>
+          deserves <span class="gradient-text">protection.</span>
+        </h1>
+
+        <p class="hero-description">
+          Explore privacy-focused tools for images and videos.
+          Analyze, watermark and experiment with media protection
+          directly in your browser.
+        </p>
+
+        <div class="hero-actions">
+          <button class="button" id="heroLaunch">
+            Open CloakStudio <span>→</span>
+          </button>
+          <a href="#features" class="button button-outline">Explore features</a>
+        </div>
+
+        <div class="hero-trust">
+          <span>✓ No account required</span>
+          <span>✓ Browser-based processing</span>
+          <span>✓ No media upload server</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-glow"></div>
+        <div class="visual-card">
+          <div class="visual-top">
+            <span class="window-dots">● ● ●</span>
+            <span>PROTECTION WORKSPACE</span>
+          </div>
+          <div class="visual-art">
+            <div class="art-ring ring-one"></div>
+            <div class="art-ring ring-two"></div>
+            <div class="art-core">C</div>
+            <div class="floating-chip chip-one">IMAGE</div>
+            <div class="floating-chip chip-two">PRIVACY</div>
+            <div class="floating-chip chip-three">VIDEO</div>
+          </div>
+          <div class="visual-bottom">
+            <span><i class="status-dot"></i> Local workspace</span>
+            <span>READY</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="feature-section" id="features">
+      <div class="section-heading">
+        <span class="eyebrow">THE TOOLKIT</span>
+        <h2>One workspace. Multiple possibilities.</h2>
+        <p>Tools designed to help creators understand and protect their media.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon">▧</span>
+          <h3>Image Studio</h3>
+          <p>Inspect and experiment with image protection workflows.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">▶</span>
+          <h3>Video Studio</h3>
+          <p>Explore video frames, media details and export workflows.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">◈</span>
+          <h3>Watermark Studio</h3>
+          <p>Prepare visible attribution and supported watermarking.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">⌕</span>
+          <h3>Media Analyzer</h3>
+          <p>Explore metadata, file information and provenance.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="privacy-section" id="privacy">
+      <div>
+        <span class="eyebrow">PRIVACY BY DESIGN</span>
+        <h2>Your media stays<br><span class="gradient-text">in your browser.</span></h2>
+        <p>
+          CloakStudio is designed around local processing.
+          Your selected media is not intentionally uploaded to a
+          CloakStudio backend because this project has no backend server.
+        </p>
+      </div>
+      <div class="privacy-points">
+        <div>01 <span>No account system</span></div>
+        <div>02 <span>Temporary working session</span></div>
+        <div>03 <span>User-controlled exports</span></div>
+        <div>04 <span>No automatic cloud backup</span></div>
+      </div>
+    </section>
+
+    <footer class="landing-footer">
+      <a href="#" class="brand">
+        <span class="brand-mark">C</span>
+        CloakStudio
+      </a>
+      <span>Built for creators. Designed for control.</span>
+      <span>© 2026 CloakStudio</span>
+    </footer>
+  </section>
+
+  <!-- APPLICATION -->
+  <div id="app" class="app hidden">
+
+    <aside class="sidebar">
+      <a href="#" class="brand">
+        <span class="brand-mark">C</span>
+        <span>Cloak<span class="brand-light">Studio</span></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <button class="side-link active" data-page="home">⌂ <span>Dashboard</span></button>
+      <button class="side-link" data-page="image">▧ <span>Image Studio</span></button>
+      <button class="side-link" data-page="video">▶ <span>Video Studio</span></button>
+
+      <div class="sidebar-label">PROTECTION</div>
+      <button class="side-link" data-page="watermark">◈ <span>Watermark Studio</span></button>
+      <button class="side-link" data-page="analyzer">⌕ <span>Media Analyzer</span></button>
+      <button class="side-link" data-page="cloaking">⬡ <span>AI Cloaking Lab</span></button>
+      <button class="side-link" data-page="poisoning">⌘ <span>AI Poisoning Lab</span></button>
+
+      <div class="sidebar-label">MORE</div>
+      <button class="side-link" data-page="privacy">♧ <span>Privacy</span></button>
+      <button class="side-link" data-page="settings">⚙ <span>Settings</span></button>
+
+      <div class="sidebar-bottom">
+        <div class="local-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Local session</strong>
+            <small>Temporary workspace</small>
+          </div>
+        </div>
+        <button class="side-link" id="exitStudio">← <span>Back to landing</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="app-header">
+        <button id="menuToggle" class="icon-button" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">CloakStudio <span>/</span> <strong id="pageTitle">Dashboard</strong></div>
+        <div class="header-right">
+          <span class="session-label"><i class="status-dot"></i> Temporary session</span>
+        </div>
+      </header>
+
+      <div class="page-container">
+
+        <!-- DASHBOARD -->
+        <section class="page active" id="page-home">
+          <div class="welcome-row">
+            <div>
+              <span class="eyebrow">YOUR CREATIVE WORKSPACE</span>
+              <h1>Welcome to <span class="gradient-text">CloakStudio.</span></h1>
+              <p>Explore your tools. Keep control of your media.</p>
+            </div>
+            <div class="date-card">
+              <span>WORKSPACE STATUS</span>
+              <strong><i class="status-dot"></i> Ready</strong>
+            </div>
+          </div>
+
+          <div class="notice">
+            <span>ⓘ</span>
+            <div>
+              <strong>Temporary workspace</strong>
+              <p>Files are held in memory during this session. Refreshing or closing the page clears your working session.</p>
+            </div>
+          </div>
+
+          <div class="section-title">
+            <div>
+              <h2>Choose your workspace</h2>
+              <p>Start with a tool from the collection.</p>
+            </div>
+          </div>
+
+          <div class="tool-grid">
+            <button class="tool-card featured-tool" data-page="image">
+              <span class="tool-icon">▧</span>
+              <span class="tool-tag">IMAGE</span>
+              <h3>Image Studio</h3>
+              <p>Explore image inspection and protection workflows.</p>
+              <span class="tool-arrow">Open workspace →</span>
+            </button>
+
+            <button class="tool-card" data-page="video">
+              <span class="tool-icon">▶</span>
+              <span class="tool-tag">VIDEO</span>
+              <h3>Video Studio</h3>
+              <p>Explore video inspection and processing.</p>
+              <span class="tool-arrow">Open workspace →</span>
+            </button>
+
+            <button class="tool-card" data-page="watermark">
+              <span class="tool-icon">◈</span>
+              <span class="tool-tag">ATTRIBUTION</span>
+              <h3>Watermark Studio</h3>
+              <p>Prepare media attribution workflows.</p>
+              <span class="tool-arrow">Open workspace →</span>
+            </button>
+
+            <button class="tool-card" data-page="analyzer">
+              <span class="tool-icon">⌕</span>
+              <span class="tool-tag">INSPECTION</span>
+              <h3>Media Analyzer</h3>
+              <p>Inspect file properties and metadata.</p>
+              <span class="tool-arrow">Open workspace →</span>
+            </button>
+
+            <button class="tool-card" data-page="cloaking">
+              <span class="tool-icon">⬡</span>
+              <span class="tool-tag">EXPERIMENTAL</span>
+              <h3>AI Cloaking Lab</h3>
+              <p>Explore experimental media transformations.</p>
+              <span class="tool-arrow">Explore lab →</span>
+            </button>
+
+            <button class="tool-card" data-page="poisoning">
+              <span class="tool-icon">⌘</span>
+              <span class="tool-tag">RESEARCH</span>
+              <h3>AI Poisoning Lab</h3>
+              <p>Explore controlled defensive research concepts.</p>
+              <span class="tool-arrow">Explore lab →</span>
+            </button>
+          </div>
+
+          <div class="upload-panel">
+            <div>
+              <span class="eyebrow">QUICK ACCESS</span>
+              <h2>Bring your media into the workspace.</h2>
+              <p>Select an image or video to begin a temporary session.</p>
+            </div>
+            <div class="upload-zone" id="uploadZone">
+              <div class="upload-symbol">↑</div>
+              <strong>Drop your media here</strong>
+              <span>Images and videos supported by your browser</span>
+              <label for="fileInput" class="button button-small">Choose files</label>
+              <input type="file" id="fileInput" accept="image/*,video/*" multiple hidden>
+              <small>Files are not uploaded to a server.</small>
+            </div>
+          </div>
+
+          <section class="session-files">
+            <div class="section-title">
+              <div>
+                <h2>Current session</h2>
+                <p>Files currently held in memory.</p>
+              </div>
+              <button id="clearFiles" class="text-button">Clear session</button>
+            </div>
+            <div id="fileList" class="file-list">
+              <div class="empty-state">
+                <span>▤</span>
+                <strong>No files in this session</strong>
+                <p>Your selected media will appear here.</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- TOOL PAGES -->
+        <section class="page" id="page-image">
+          <div class="page-intro">
+            <span class="eyebrow">IMAGE WORKSPACE</span>
+            <h1>Image Studio</h1>
+            <p>Prepare images for inspection and future protection tools.</p>
+          </div>
+          <div class="module-placeholder">
+            <span class="large-icon">▧</span>
+            <h2>Image engine is being developed</h2>
+            <p>The image processing engine, editing controls and quality verification will be implemented in a later phase.</p>
+            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-video">
+          <div class="page-intro">
+            <span class="eyebrow">VIDEO WORKSPACE</span>
+            <h1>Video Studio</h1>
+            <p>Explore video inspection, frame processing and export.</p>
+          </div>
+          <div class="module-placeholder">
+            <span class="large-icon">▶</span>
+            <h2>Video engine is being developed</h2>
+            <p>Video decoding, frame processing, audio preservation and encoding will be developed and tested separately.</p>
+            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-watermark">
+          <div class="page-intro">
+            <span class="eyebrow">ATTRIBUTION</span>
+            <h1>Watermark Studio</h1>
+            <p>Explore visible and supported invisible watermarking.</p>
+          </div>
+          <div class="module-placeholder">
+            <span class="large-icon">◈</span>
+            <h2>Watermark engine is planned</h2>
+            <p>Watermark creation, placement, export and verification will be implemented in a dedicated phase.</p>
+            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-analyzer">
+          <div class="page-intro">
+            <span class="eyebrow">INSPECTION</span>
+            <h1>Media Analyzer</h1>
+            <p>Understand your media files and their available metadata.</p>
+          </div>
+          <div class="module-placeholder">
+            <span class="large-icon">⌕</span>
+            <h2>Analyzer engine is planned</h2>
+            <p>Metadata inspection, cryptographic hashes and provenance verification are planned.</p>
+            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-cloaking">
+          <div class="page-intro">
+            <span class="eyebrow">EXPERIMENTAL RESEARCH</span>
+            <h1>AI Cloaking Lab</h1>
+            <p>Explore experimental privacy-oriented transformations.</p>
+          </div>
+          <div class="module-placeholder">
+            <span class="large-icon">⬡</span>
+            <h2>Experimental module</h2>
+            <p>No transformation can guarantee that AI systems will not recognize or use media.</p>
+            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-poisoning">
+          <div class="page-intro">
+            <span class="eyebrow">DEFENSIVE RESEARCH</span>
+            <h1>AI Poisoning Lab</h1>
+            <p>Explore controlled research into media protection concepts.</p>
+          </div>
+          <div class="module-placeholder">
+            <span class="large-icon">⌘</span>
+            <h2>Research module</h2>
+            <p>Experiments will distinguish theoretical transformations from demonstrated model behavior.</p>
+            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-privacy">
+          <div class="page-intro">
+            <span class="eyebrow">YOUR CONTROL</span>
+            <h1>Privacy Center</h1>
+            <p>Understand how CloakStudio handles your session.</p>
+          </div>
+          <div class="info-card">
+            <h2>Temporary local processing</h2>
+            <p>Selected file objects are held in browser memory. This version does not save your files to IndexedDB or Local Storage.</p>
+            <p>Refreshing or closing the page ends the working session. Downloaded exports are stored wherever you choose to save them.</p>
+            <p>GitHub Pages delivers the application itself. We will audit application dependencies and network activity before making stronger privacy claims.</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="page-intro">
+            <span class="eyebrow">PREFERENCES</span>
+            <h1>Settings</h1>
+            <p>Manage your temporary workspace.</p>
+          </div>
+          <div class="info-card">
+            <h2>Session controls</h2>
+            <p>Files are not saved between sessions.</p>
+            <button class="button button-danger" id="settingsClear">Clear temporary session</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <nav class="mobile-nav">
+      <button class="mobile-link active" data-page="home"><span>⌂</span>Home</button>
+      <button class="mobile-link" data-page="image"><span>▧</span>Image</button>
+      <button class="mobile-link" data-page="video"><span>▶</span>Video</button>
+      <button class="mobile-link" data-page="watermark"><span>◈</span>Protect</button>
+      <button class="mobile-link" data-page="settings"><span>•••</span>More</button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
