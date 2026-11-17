@@ -305,11 +305,41 @@
             <h1>Image Studio</h1>
             <p>Prepare images for inspection and future protection tools.</p>
           </div>
-          <div class="module-placeholder">
-            <span class="large-icon">▧</span>
-            <h2>Image engine is being developed</h2>
-            <p>The image processing engine, editing controls and quality verification will be implemented in a later phase.</p>
-            <button class="button button-outline" data-page="home">Return to dashboard</button>
+          <div class="image-workspace">
+            <div class="image-toolbar">
+              <label class="button button-small" for="imageFileInput">Choose image</label>
+              <input id="imageFileInput" type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/bmp" hidden>
+              <button class="button button-outline button-small" id="imageReset" type="button" disabled>Reset edits</button>
+              <span class="image-hint" id="imageStatus">Choose an image to begin. Your file stays in this browser session.</span>
+            </div>
+            <div class="image-editor-grid">
+              <div class="image-canvas-panel">
+                <div class="canvas-heading"><strong>Preview</strong><span id="imageDimensions">No image loaded</span></div>
+                <div class="canvas-stage" id="canvasStage">
+                  <div class="canvas-empty" id="canvasEmpty"><span>▧</span><strong>Your image preview appears here</strong><small>PNG, JPG, WebP, AVIF and BMP</small></div>
+                  <canvas id="imageCanvas" class="hidden" aria-label="Edited image preview"></canvas>
+                </div>
+              </div>
+              <aside class="image-controls">
+                <div class="control-heading"><strong>Adjustments</strong><span>Live preview</span></div>
+                <label class="range-control">Brightness <output id="brightnessValue">100%</output><input id="brightness" type="range" min="0" max="200" value="100"></label>
+                <label class="range-control">Contrast <output id="contrastValue">100%</output><input id="contrast" type="range" min="0" max="200" value="100"></label>
+                <label class="range-control">Saturation <output id="saturationValue">100%</output><input id="saturation" type="range" min="0" max="200" value="100"></label>
+                <label class="toggle-control"><input id="grayscale" type="checkbox"> Grayscale</label>
+                <div class="control-heading"><strong>Transform</strong></div>
+                <div class="transform-buttons">
+                  <button class="button button-outline button-small" id="rotateLeft" type="button">↶ Rotate</button>
+                  <button class="button button-outline button-small" id="rotateRight" type="button">↷ Rotate</button>
+                  <button class="button button-outline button-small" id="flipX" type="button">↔ Flip H</button>
+                  <button class="button button-outline button-small" id="flipY" type="button">↕ Flip V</button>
+                </div>
+                <div class="control-heading"><strong>Export</strong></div>
+                <label class="select-control">Format<select id="imageFormat"><option value="image/png">PNG (lossless)</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></label>
+                <label class="range-control" id="qualityWrap">Quality <output id="qualityValue">92%</output><input id="imageQuality" type="range" min="50" max="100" value="92"></label>
+                <button class="button image-export" id="exportImage" type="button" disabled>Export edited image ↓</button>
+                <p class="export-note">The original file is never overwritten. JPEG and WebP use lossy compression; PNG is lossless.</p>
+              </aside>
+            </div>
           </div>
         </section>
 
