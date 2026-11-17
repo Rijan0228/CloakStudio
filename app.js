@@ -264,3 +264,176 @@ window.addEventListener("drop", event => {
 
 // Start on landing page.
 renderFiles();
+
+
+// IMAGE STUDIO — browser-local editing and export
+import { loadImageFile, drawImage, exportCanvas } from "./engines/image-engine.js";
+
+const imageInput = document.getElementById("imageFileInput");
+const imageCanvas = document.getElementById("imageCanvas");
+const imageStatus = document.getElementById("imageStatus");
+const imageDimensions = document.getElementById("imageDimensions");
+const imageEmpty = document.getElementById("canvasEmpty");
+const imageExportButton = document.getElementById("exportImage");
+const imageResetButton = document.getElementById("imageReset");
+
+let activeImage = null;
+let imageRotation = 0;
+let imageFlipX = false;
+let imageFlipY = false;
+let imageObjectUrl = null;
+
+const imageDefaults = {
+  brightness: 100,
+  contrast: 100,
+  saturation: 100,
+  grayscale: false
+};
+
+function currentImageSettings() {
+  return {
+    brightness: Number(document.getElementById("brightness").value),
+    contrast: Number(document.getElementById("contrast").value),
+    saturation: Number(document.getElementById("saturation").value),
+    grayscale: document.getElementById("grayscale").checked,
+    rotation: imageRotation,
+    flipX: imageFlipX,
+    flipY: imageFlipY
+  };
+}
+
+function renderImagePreview() {
+  if (!activeImage) return;
+  try {
+    const dimensions = drawImage(imageCanvas, activeImage.image, currentImageSettings());
+    imageDimensions.textContent = `${dimensions.width.toLocaleString()} × ${dimensions.height.toLocaleString()} px`;
+    imageStatus.textContent = "Preview updated locally.";
+  } catch (error) {
+    imageStatus.textContent = error.message;
+  }
+}
+
+async function openImageInStudio(file) {
+  if (!file) return;
+  if (!file.type.startsWith("image/")) {
+    showToast("Please choose an image file.");
+    return;
+  }
+  if (file.size > MAX_FILE_SIZE) {
+    showToast("This image is larger than the 500 MB session limit.");
+    return;
+  }
+
+  imageStatus.textContent = "Reading image locally…";
+  try {
+    const loaded = await loadImageFile(file);
+    if (imageObjectUrl) URL.revokeObjectURL(imageObjectUrl);
+    imageObjectUrl = loaded.url;
+    activeImage = { ...loaded, name: file.name };
+    imageRotation = 0;
+    imageFlipX = false;
+    imageFlipY = false;
+    resetImageControls(false);
+    imageEmpty.classList.add("hidden");
+    imageCanvas.classList.remove("hidden");
+    imageExportButton.disabled = false;
+    imageResetButton.disabled = false;
+    renderImagePreview();
+    imageStatus.textContent = `Loaded: ${file.name}`;
+  } catch (error) {
+    imageStatus.textContent = error.message || "Could not open this image.";
+    showToast(imageStatus.textContent);
+  }
+}
+
+function resetImageControls(redraw = true) {
+  Object.entries(imageDefaults).forEach(([key, value]) => {
+    const control = document.getElementById(key);
+    if (control.type === "checkbox") control.checked = value;
+    else control.value = value;
+  });
+  ["brightness", "contrast", "saturation"].forEach(id => {
+    document.getElementById(id + "Value").textContent = "100%";
+  });
+  imageRotation = 0;
+  imageFlipX = false;
+  imageFlipY = false;
+  if (redraw && activeImage) renderImagePreview();
+}
+
+if (imageInput) {
+  imageInput.addEventListener("change", event => {
+    openImageInStudio(event.target.files?.[0]);
+    event.target.value = "";
+  });
+
+  ["brightness", "contrast", "saturation"].forEach(id => {
+    const control = document.getElementById(id);
+    control.addEventListener("input", () => {
+      document.getElementById(id + "Value").textContent = control.value + "%";
+      renderImagePreview();
+    });
+  });
+
+  document.getElementById("grayscale").addEventListener("change", renderImagePreview);
+  document.getElementById("rotateLeft").addEventListener("click", () => {
+    imageRotation = (imageRotation + 270) % 360;
+    renderImagePreview();
+  });
+  document.getElementById("rotateRight").addEventListener("click", () => {
+    imageRotation = (imageRotation + 90) % 360;
+    renderImagePreview();
+  });
+  document.getElementById("flipX").addEventListener("click", () => {
+    imageFlipX = !imageFlipX;
+    renderImagePreview();
+  });
+  document.getElementById("flipY").addEventListener("click", () => {
+    imageFlipY = !imageFlipY;
+    renderImagePreview();
+  });
+  imageResetButton.addEventListener("click", () => {
+    resetImageControls();
+    showToast("Image adjustments reset.");
+  });
+
+  const formatSelect = document.getElementById("imageFormat");
+  const qualityControl = document.getElementById("imageQuality");
+  formatSelect.addEventListener("change", () => {
+    document.getElementById("qualityWrap").classList.toggle("hidden", formatSelect.value === "image/png");
+  });
+  qualityControl.addEventListener("input", () => {
+    document.getElementById("qualityValue").textContent = qualityControl.value + "%";
+  });
+
+  imageExportButton.addEventListener("click", async () => {
+    if (!activeImage) return;
+    imageExportButton.disabled = true;
+    imageExportButton.textContent = "Preparing export…";
+    try {
+      const mime = formatSelect.value;
+      const blob = await exportCanvas(imageCanvas, mime, Number(qualityControl.value) / 100);
+      const extension = mime === "image/jpeg" ? "jpg" : mime.split("/")[1];
+      const baseName = activeImage.name.replace(/\.[^.]+$/, "").replace(/[^a-z0-9_-]/gi, "_") || "cloakstudio-image";
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${baseName}-edited.${extension}`;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast("Export created. Your original image is unchanged.");
+      imageStatus.textContent = `Export ready: ${formatBytes(blob.size)}`;
+    } catch (error) {
+      showToast(error.message || "Image export failed.");
+    } finally {
+      imageExportButton.disabled = false;
+      imageExportButton.textContent = "Export edited image ↓";
+    }
+  });
+}
+
+window.addEventListener("pagehide", () => {
+  if (imageObjectUrl) URL.revokeObjectURL(imageObjectUrl);
+});
