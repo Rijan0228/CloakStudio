@@ -1,3 +1,5 @@
+import { loadImageFile, drawImage, exportCanvas } from "./engines/image-engine.js";
+
 
 const landing = document.getElementById("landing");
 const app = document.getElementById("app");
@@ -267,7 +269,6 @@ renderFiles();
 
 
 // IMAGE STUDIO — browser-local editing and export
-import { loadImageFile, drawImage, exportCanvas } from "./engines/image-engine.js";
 
 const imageInput = document.getElementById("imageFileInput");
 const imageCanvas = document.getElementById("imageCanvas");
