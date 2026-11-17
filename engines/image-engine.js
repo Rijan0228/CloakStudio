@@ -17,6 +17,9 @@ export async function loadImageFile(file) {
     if (!image.naturalWidth || !image.naturalHeight) {
       throw new Error("The browser could not read this image.");
     }
+    if (image.naturalWidth * image.naturalHeight > 40000000) {
+      throw new Error("This image exceeds the 40-megapixel safety limit for this browser editor.");
+    }
 
     return {
       image,
